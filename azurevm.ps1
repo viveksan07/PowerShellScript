@@ -2,7 +2,7 @@
 Connect-AzAccount -Identity
 
 # Create a resource group
-$resourceGroupName = "test-rg"
+$resourceGroupName = "test1-rg"
 $location = "EastUS2"
 New-AzResourceGroup -Name $resourceGroupName -Location $location
 
