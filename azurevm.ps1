@@ -1,3 +1,6 @@
+# Log in to Azure 
+Connect-AzAccount -Identity
+
 # Create a resource group
 $resourceGroupName = "test-rg"
 $location = "EastUS2"
@@ -18,9 +21,14 @@ $subnet = $vnet.Subnets | Where-Object { $_.Name -eq $subnetName }
 $nicName = "nic-2"
 $nic = New-AzNetworkInterface -Name $nicName -ResourceGroupName $resourceGroupName -Location $location -SubnetId $subnet.Id
 
+# Retrieve the credential from Azure Automation
+$credential = Get-AutomationPSCredential -Name "VMAdminCredential"
+if (-not $credential) {
+    throw "Could not retrieve the credential. Ensure that the credential name is correct and that it has been added to the Automation Account."
+}
+
 # Create a virtual machine configuration
 $vmName = "MyVM"
-$credential = Get-Credential
 
 $vmConfig = New-AzVMConfig -VMName $vmName -VMSize "Standard_B2s" | `
     Set-AzVMOperatingSystem -Windows -ComputerName $vmName -Credential $credential | `
