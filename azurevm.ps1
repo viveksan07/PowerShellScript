@@ -1,6 +1,3 @@
-# Log in to Azure using device authentication
-Connect-AzAccount 
-
 # Create a resource group
 $resourceGroupName = "test-rg"
 $location = "EastUS2"
