@@ -1,4 +1,4 @@
-# Log in to Azure 
+# Log in to Azure using managed identity
 Connect-AzAccount -Identity
 
 # Create a resource group
